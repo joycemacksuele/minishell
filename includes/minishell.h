@@ -132,7 +132,8 @@ char		*last_arg(t_command *cmd);
 /*
 ** Loop functions
 */
-int			main_loop(t_list **env, t_list **export);
+//int			main_loop(t_list **env, t_list **export);
+int			main_loop(t_list **env, t_list **export, char *argv);
 int			gnl_ctrld(int fd, char **line);
 
 /*

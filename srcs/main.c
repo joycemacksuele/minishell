@@ -79,8 +79,8 @@ int		main(int ac, char **av, char **ep)
 	char	**export_env_tab;
 
 	(void)av;
-	if (ac != 1)
-		return (-1);
+//	if (ac != 1)
+//		return (-1);
 	env = create_env_list(ep);
 	export_env_tab = export_env(ep);
 	export = create_env_list(export_env_tab);
@@ -90,8 +90,10 @@ int		main(int ac, char **av, char **ep)
 		return (RT_FAIL);
 	g_exit_status = 0;
 	g_line_eraser = 0;
-	if (main_loop(&env, &export) == RT_FAIL)
-		return (RT_FAIL);
+
+	if (ac >= 2 && ft_strcmp(av[1], "-c") == 0)//FOR TESTER
+		if (main_loop(&env, &export, av[2]) == RT_FAIL)
+			return (RT_FAIL);
 	ft_freetab(export_env_tab);
 	ft_lstclear(&export, &clear_envlist);
 //	system("leaks minishell");

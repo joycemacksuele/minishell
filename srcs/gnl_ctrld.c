@@ -123,11 +123,11 @@ static int	check_ctrld(char **line)
 	// the signal inside the check_ctrld() function too, that is why we dont
 	// need to call signal() there again.
 
-static void	display_prompt()
+/*static void	display_prompt()
 {
 	if (g_line_eraser == 0)
 		ft_putstr_fd("\033[1;32mminishell$\033[0m ", 1);
-}
+}*/
 
 int		gnl_ctrld(int fd, char **line)
 {
@@ -138,7 +138,7 @@ int		gnl_ctrld(int fd, char **line)
 			fd > MAX_FD || read(fd, buf[fd], 0) == -1)
 		return (-1);
 	signal(SIGINT, ctrl_c_handler);
-	display_prompt();
+	//display_prompt();
 	if (!(*line = ft_strnew(0)))
 		return (0);
 	while (!(adr = ft_strchr(buf[fd], '\n')))

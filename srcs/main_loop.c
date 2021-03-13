@@ -118,26 +118,29 @@ char	*save_path_env(t_list **env)
 	return (ft_strdup(saved_path));
 }
 
-int		main_loop(t_list **env, t_list **export)
+int		main_loop(t_list **env, t_list **export, char *argv)
 {
 	t_list	*cmd;
-	char	*line;
+//	char	*line;
 	char	*saved_path;
 	int		ret_gnl;
 
+	ret_gnl = 0;
 	signal(SIGQUIT, ctrl_back_slash_handler);
 	saved_path = save_path_env(env);
-	while ((ret_gnl = gnl_ctrld(0, &line)) > 0)
-	{
-		if (verify_line(line))
-			continue;
-		if (!(cmd = tokenizer(line)))
-			return (RT_FAIL);
+//	while ((ret_gnl = gnl_ctrld(0, &line)) > 0)
+//	{
+//	if (verify_line(line))
+//		continue ;
+//	printf("\nargv = %s\n", argv);
+	verify_line(argv);
+	if (!(cmd = tokenizer(argv)))//line
+		return (RT_FAIL);
 		//ft_lstiter(cmd, &print_tok);//TO DEL LATER
-		free(line);
-		if (executer(env, cmd, export, saved_path) != RT_SUCCESS)
-			return (clear_lists_exit(&cmd, env, saved_path));
-		ft_lstclear(&cmd, &clear_commandlist);
-	}
-	return (return_to_main(env, line, ret_gnl, saved_path));
+	//	free(line);
+	if (executer(env, cmd, export, saved_path) != RT_SUCCESS)
+		return (clear_lists_exit(&cmd, env, saved_path));
+	ft_lstclear(&cmd, &clear_commandlist);
+//	}
+	return (return_to_main(env, argv, ret_gnl, saved_path));//line
 }

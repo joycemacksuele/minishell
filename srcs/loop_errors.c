@@ -3,7 +3,8 @@
 int		return_to_main(t_list **env, char *line, int ret_gnl, char *saved_path)
 {
 	free(saved_path);
-	free(line);
+	line = NULL;
+//	free(line); commented for tester UNCOMMENT LATER
 	ft_lstclear(env, &clear_envlist);
 	if (ret_gnl == -1)
 		return (RT_FAIL);
